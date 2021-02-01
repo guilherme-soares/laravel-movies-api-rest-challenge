@@ -14,6 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Protected routes
+Route::group(['middleware' => ['apiAuth']], function() {
+	Route::get('/movies', 'App\\Http\\Controllers\\Api\\MovieController@index');
+	Route::get('/movies/{id}', 'App\\Http\\Controllers\\Api\\MovieController@show');
+	Route::get('/reviews', 'App\\Http\\Controllers\\Api\\ReviewController@index');
+	Route::get('/reviews/{id}', 'App\\Http\\Controllers\\Api\\ReviewController@show');
+	Route::post('/reviews/new', 'App\\Http\\Controllers\\Api\\ReviewController@store');
+	Route::get('/users', 'App\\Http\\Controllers\\Api\\UserController@index');
 });
+
+Route::post('/users/new', 'App\\Http\\Controllers\\Api\\UserController@store');
+
+Route::post('/login', 'App\\Http\\Controllers\\Api\\AuthController@login');
