@@ -9,6 +9,14 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+/**
+ * @OA\Schema(
+ *  @OA\Xml(name="User"),
+ *  @OA\Property(property="id", type="integer"),
+ *  @OA\Property(property="name", type="string"),
+ *  @OA\Property(property="email", type="string"),
+ * )
+ */
 class User extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable;
@@ -32,6 +40,8 @@ class User extends Authenticatable implements JWTSubject
     protected $hidden = [
         'password',
         'remember_token',
+        'created_at',
+        'updated_at',
     ];
 
     /**

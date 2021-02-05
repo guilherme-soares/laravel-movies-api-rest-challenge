@@ -1,0 +1,383 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Movies & Reviews API Docs",
+        "description": "Registration of movies and reviews.",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api",
+            "description": "Movies and Reviews API"
+        },
+        {
+            "url": "/api"
+        }
+    ],
+    "paths": {
+        "/movies": {
+            "get": {
+                "tags": [
+                    "Movie"
+                ],
+                "summary": "List all movies",
+                "description": "List basic information of all movies",
+                "operationId": "App\\Http\\Controllers\\Api\\MovieController::index",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized access"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/movies/{movieId}": {
+            "get": {
+                "tags": [
+                    "Movie"
+                ],
+                "summary": "Find a movie",
+                "description": "Returns a single movie",
+                "operationId": "App\\Http\\Controllers\\Api\\MovieController::show",
+                "parameters": [
+                    {
+                        "name": "movieId",
+                        "in": "path",
+                        "description": "ID of movie to return",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Movie"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized access"
+                    },
+                    "404": {
+                        "description": "Movie not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/reviews": {
+            "get": {
+                "tags": [
+                    "Review"
+                ],
+                "summary": "List basic information of all reviews",
+                "description": "",
+                "operationId": "App\\Http\\Controllers\\Api\\ReviewController::index",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized access"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Review"
+                ],
+                "summary": "Add a new review",
+                "description": "",
+                "operationId": "App\\Http\\Controllers\\Api\\ReviewController::store",
+                "requestBody": {
+                    "description": "Review object that needs to be added",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreReviewRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Review"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation errors"
+                    }
+                }
+            }
+        },
+        "/reviews/{reviewId}": {
+            "get": {
+                "tags": [
+                    "Review"
+                ],
+                "summary": "Find a review",
+                "description": "Returns a single review",
+                "operationId": "App\\Http\\Controllers\\Api\\ReviewController::show",
+                "parameters": [
+                    {
+                        "name": "reviewId",
+                        "in": "path",
+                        "description": "ID of review to return",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Review"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized access"
+                    },
+                    "404": {
+                        "description": "Review not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "List all users",
+                "description": "List name and email of all users",
+                "operationId": "App\\Http\\Controllers\\Api\\UserController::index",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized access"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Add a new user",
+                "description": "",
+                "operationId": "App\\Http\\Controllers\\Api\\UserController::store",
+                "requestBody": {
+                    "description": "User object that needs to be added",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreUserRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation errors"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "StoreReviewRequest": {
+                "required": [
+                    "title",
+                    "description",
+                    "rating",
+                    "movie_id"
+                ],
+                "properties": {
+                    "title": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "rating": {
+                        "type": "number",
+                        "example": "8.5"
+                    },
+                    "movie_id": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "StoreReviewRequest"
+                }
+            },
+            "StoreUserRequest": {
+                "required": [
+                    "name",
+                    "email",
+                    "password"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "StoreUserRequest"
+                }
+            },
+            "Movie": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "year": {
+                        "type": "integer"
+                    },
+                    "sinopse": {
+                        "type": "string"
+                    },
+                    "duration": {
+                        "type": "string"
+                    },
+                    "directors": {
+                        "type": "string"
+                    },
+                    "writers": {
+                        "type": "string"
+                    },
+                    "stars": {
+                        "type": "object"
+                    },
+                    "rating": {
+                        "type": "number",
+                        "example": "8.5"
+                    },
+                    "image": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Movie"
+                }
+            },
+            "Review": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "rating": {
+                        "type": "number",
+                        "example": "8.5"
+                    },
+                    "movie_id": {
+                        "type": "integer"
+                    },
+                    "user_id": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Review"
+                }
+            },
+            "User": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "User"
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}

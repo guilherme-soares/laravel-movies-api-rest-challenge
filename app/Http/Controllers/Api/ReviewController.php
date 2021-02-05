@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\StoreReviewRequest;
 use App\Models\Review;
-use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
@@ -13,6 +12,16 @@ class ReviewController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     *
+     * @OA\Get(
+     *     tags={"Review"},
+     *     summary="List basic information of all reviews",
+     *     description="",
+     *     path="/reviews",
+     *     security={ {"bearer": {} }},
+     *     @OA\Response(response="200", description="Successful operation"),
+     *     @OA\Response(response="401", description="Unauthorized access")
+     * ),
      */
     public function index()
     {
@@ -37,12 +46,43 @@ class ReviewController extends Controller
      *
      * @param int $id
      * @return \Illuminate\Http\Response
+     *
+     * @OA\Get(
+     *     tags={"Review"},
+     *     summary="Find a review",
+     *     description="Returns a single review",
+     *     path="/reviews/{reviewId}",
+     *     security={ {"bearer": {} }},
+     *     @OA\Parameter(
+     *          name="reviewId",
+     *          description="ID of review to return",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *     ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/Review")
+     *     ),
+     *     @OA\Response(
+     *          response="401",
+     *          description="Unauthorized access"
+     *     ),
+     *     @OA\Response(response="404", description="Review not found"),
+     * ),
      */
     public function show($id)
     {
-        $review = Review::findOrFail($id);
+        try {
+            $review = Review::findOrFail($id);
 
-        return response()->json($review);
+            return response()->json($review);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Review not found.'], 404);
+        }
     }
 
     /**
@@ -50,6 +90,27 @@ class ReviewController extends Controller
      *
      * @param \App\Http\Requests\Api\StoreReviewRequest $request
      * @return \Illuminate\Http\JsonResponse
+     *
+     * @OA\Post(
+     *     tags={"Review"},
+     *     summary="Add a new review",
+     *     description="",
+     *     path="/reviews",
+     *     @OA\RequestBody(
+     *          required=true,
+     *          description="Review object that needs to be added",
+     *          @OA\JsonContent(ref="#/components/schemas/StoreReviewRequest"),
+     *     ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/Review"),
+     *     ),
+     *     @OA\Response(
+     *          response="422",
+     *          description="Validation errors",
+     *     )
+     * ),
      */
     public function store(StoreReviewRequest $request)
     {

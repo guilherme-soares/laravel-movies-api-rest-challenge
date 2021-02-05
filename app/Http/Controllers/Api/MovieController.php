@@ -12,6 +12,16 @@ class MovieController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     *
+     * @OA\Get(
+     *     tags={"Movie"},
+     *     summary="List all movies",
+     *     description="List basic information of all movies",
+     *     path="/movies",
+     *     security={ {"bearer": {} }},
+     *     @OA\Response(response="200", description="Successful operation"),
+     *     @OA\Response(response="401", description="Unauthorized access")
+     * ),
      */
     public function index()
     {
@@ -25,6 +35,33 @@ class MovieController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     *
+     * @OA\Get(
+     *     tags={"Movie"},
+     *     summary="Find a movie",
+     *     description="Returns a single movie",
+     *     path="/movies/{movieId}",
+     *     security={ {"bearer": {} }},
+     *     @OA\Parameter(
+     *          name="movieId",
+     *          description="ID of movie to return",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *     ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/Movie")
+     *     ),
+     *     @OA\Response(
+     *          response="401",
+     *          description="Unauthorized access"
+     *     ),
+     *     @OA\Response(response="404", description="Movie not found"),
+     * ),
      */
     public function show($id)
     {

@@ -4,6 +4,17 @@ namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @OA\Schema(
+ *  @OA\Xml(name="StoreReviewRequest"),
+ *  @OA\Property(property="title", type="string"),
+ *  @OA\Property(property="description", type="string"),
+ *  @OA\Property(property="rating", type="number", example="8.5"),
+ *  @OA\Property(property="movie_id", type="integer"),
+ *  required={"title","description","rating","movie_id"},
+ *  type="object"
+ * )
+ */
 class StoreReviewRequest extends FormRequest
 {
     /**
@@ -44,7 +55,7 @@ class StoreReviewRequest extends FormRequest
             'title.*'       => 'Please, type in a valid title (max 255 characters).',
             'description.*' => 'Please, type in a valid description (max 255 characters).',
             'rating.*'      => 'Please, type in a rating between 1 and 10.',
-            'movie_id.*'    => 'Please, select a movie.',
+            'movie_id.*'    => 'Please, select an existing movie.',
         ];
     }
 }
