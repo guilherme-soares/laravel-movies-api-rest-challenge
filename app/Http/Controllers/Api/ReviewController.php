@@ -17,7 +17,7 @@ class ReviewController extends Controller
      *     tags={"Review"},
      *     summary="List basic information of all reviews",
      *     description="",
-     *     path="/reviews",
+     *     path="/review",
      *     security={ {"bearer": {} }},
      *     @OA\Response(response="200", description="Successful operation"),
      *     @OA\Response(response="401", description="Unauthorized access")
@@ -51,7 +51,7 @@ class ReviewController extends Controller
      *     tags={"Review"},
      *     summary="Find a review",
      *     description="Returns a single review",
-     *     path="/reviews/{reviewId}",
+     *     path="/review/{reviewId}",
      *     security={ {"bearer": {} }},
      *     @OA\Parameter(
      *          name="reviewId",
@@ -95,7 +95,7 @@ class ReviewController extends Controller
      *     tags={"Review"},
      *     summary="Add a new review",
      *     description="",
-     *     path="/reviews",
+     *     path="/review",
      *     @OA\RequestBody(
      *          required=true,
      *          description="Review object that needs to be added",

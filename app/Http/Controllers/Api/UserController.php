@@ -17,7 +17,7 @@ class UserController extends Controller
      *     tags={"User"},
      *     summary="List all users",
      *     description="List name and email of all users",
-     *     path="/users",
+     *     path="/user",
      *     security={ {"bearer": {} }},
      *     @OA\Response(response="200", description="Successful operation"),
      *     @OA\Response(response="401", description="Unauthorized access")
@@ -40,7 +40,7 @@ class UserController extends Controller
      *     tags={"User"},
      *     summary="Add a new user",
      *     description="",
-     *     path="/users",
+     *     path="/user",
      *     @OA\RequestBody(
      *          required=true,
      *          description="User object that needs to be added",

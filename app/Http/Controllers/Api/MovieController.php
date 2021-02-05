@@ -17,7 +17,7 @@ class MovieController extends Controller
      *     tags={"Movie"},
      *     summary="List all movies",
      *     description="List basic information of all movies",
-     *     path="/movies",
+     *     path="/movie",
      *     security={ {"bearer": {} }},
      *     @OA\Response(response="200", description="Successful operation"),
      *     @OA\Response(response="401", description="Unauthorized access")
@@ -40,7 +40,7 @@ class MovieController extends Controller
      *     tags={"Movie"},
      *     summary="Find a movie",
      *     description="Returns a single movie",
-     *     path="/movies/{movieId}",
+     *     path="/movie/{movieId}",
      *     security={ {"bearer": {} }},
      *     @OA\Parameter(
      *          name="movieId",
@@ -65,8 +65,12 @@ class MovieController extends Controller
      */
     public function show($id)
     {
-		$movie = Movie::findOrFail($id);
+        try {
+            $movie = Movie::findOrFail($id);
 
-        return response()->json($movie);
+            return response()->json($movie);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Movie not found.'], 404);
+        }
     }
 }

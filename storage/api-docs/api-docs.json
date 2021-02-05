@@ -15,7 +15,7 @@
         }
     ],
     "paths": {
-        "/movies": {
+        "/movie": {
             "get": {
                 "tags": [
                     "Movie"
@@ -38,7 +38,7 @@
                 ]
             }
         },
-        "/movies/{movieId}": {
+        "/movie/{movieId}": {
             "get": {
                 "tags": [
                     "Movie"
@@ -82,7 +82,7 @@
                 ]
             }
         },
-        "/reviews": {
+        "/review": {
             "get": {
                 "tags": [
                     "Review"
@@ -139,7 +139,7 @@
                 }
             }
         },
-        "/reviews/{reviewId}": {
+        "/review/{reviewId}": {
             "get": {
                 "tags": [
                     "Review"
@@ -183,7 +183,7 @@
                 ]
             }
         },
-        "/users": {
+        "/user": {
             "get": {
                 "tags": [
                     "User"
