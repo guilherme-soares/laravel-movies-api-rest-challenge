@@ -14,3 +14,9 @@ também uma tabela de avaliações, juntamente com uma rota de listagem completa
 individual, e uma para criar uma nova avaliação.
 
 A API pode ser desenvolvida com laravel 6> ou Lumen framework.
+
+### Accessing the documentation (Swagger UI)
+
+- Open the application in the browser `http://your-configured-host/api/documentation`
+
+Obs.: After updating any OA annotation, run `php artisan l5-swagger:generate`
