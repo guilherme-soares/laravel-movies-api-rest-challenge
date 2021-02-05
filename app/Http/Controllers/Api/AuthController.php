@@ -22,12 +22,40 @@ class AuthController extends Controller
      * Get a JWT via given credentials.
      *
      * @return \Illuminate\Http\JsonResponse
+     *
+     * @OA\Post(
+     *     tags={"Auth"},
+     *     summary="Logs user into the system",
+     *     description="Used fields are Email and password",
+     *     path="/login",
+     *     @OA\RequestBody(
+     *          required=true,
+     *          description="User credentials",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="email", type="string"),
+     *              @OA\Property(property="password", type="string"),
+     *          ),
+     *     ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="Successful login",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="access_token", type="string"),
+     *              @OA\Property(property="token_type", type="string"),
+     *              @OA\Property(property="expires_in", type="integer"),
+     *          ),
+     *     ),
+     *     @OA\Response(
+     *          response="401",
+     *          description="Invalid credentials",
+     *     )
+     * ),
      */
     public function login(Request $request)
     {
         $credentials = $request->only(['email', 'password']);
 
-        if (! $token = auth('api')->attempt($credentials)) {
+        if (!$token = auth('api')->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
@@ -38,6 +66,16 @@ class AuthController extends Controller
      * Log the user out (Invalidate the token).
      *
      * @return \Illuminate\Http\JsonResponse
+     *
+     * @OA\Get(
+     *     tags={"Auth"},
+     *     summary="Logs out current logged in user",
+     *     description="",
+     *     path="/logout",
+     *     security={ {"bearer": {} }},
+     *     @OA\Response(response="200",description="Successful operation"),
+     *     @OA\Response(response="401",description="Unauthenticated",),
+     * ),
      */
     public function logout()
     {
@@ -59,7 +97,7 @@ class AuthController extends Controller
     /**
      * Get the token array structure.
      *
-     * @param  string $token
+     * @param string $token
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -67,8 +105,8 @@ class AuthController extends Controller
     {
         return response()->json([
             'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth('api')->factory()->getTTL() * 60
+            'token_type'   => 'bearer',
+            'expires_in'   => auth('api')->factory()->getTTL() * 60
         ]);
     }
 }

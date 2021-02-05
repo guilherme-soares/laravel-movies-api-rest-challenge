@@ -15,13 +15,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Protected routes
-Route::group(['middleware' => ['apiAuth']], function() {
-	Route::get('/movie', 'App\\Http\\Controllers\\Api\\MovieController@index');
-	Route::get('/movie/{id}', 'App\\Http\\Controllers\\Api\\MovieController@show');
-	Route::get('/review', 'App\\Http\\Controllers\\Api\\ReviewController@index');
-	Route::get('/review/{id}', 'App\\Http\\Controllers\\Api\\ReviewController@show');
-	Route::post('/review', 'App\\Http\\Controllers\\Api\\ReviewController@store');
-	Route::get('/user', 'App\\Http\\Controllers\\Api\\UserController@index');
+Route::group(['middleware' => ['apiAuth']], function () {
+    Route::get('/movie', 'App\\Http\\Controllers\\Api\\MovieController@index');
+    Route::get('/movie/{id}', 'App\\Http\\Controllers\\Api\\MovieController@show');
+    Route::get('/review', 'App\\Http\\Controllers\\Api\\ReviewController@index');
+    Route::get('/review/{id}', 'App\\Http\\Controllers\\Api\\ReviewController@show');
+    Route::post('/review', 'App\\Http\\Controllers\\Api\\ReviewController@store');
+    Route::get('/user', 'App\\Http\\Controllers\\Api\\UserController@index');
+    Route::get('/logout', 'App\\Http\\Controllers\\Api\\AuthController@logout');
 });
 
 Route::post('/user', 'App\\Http\\Controllers\\Api\\UserController@store');

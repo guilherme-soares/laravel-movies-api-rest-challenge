@@ -15,6 +15,89 @@
         }
     ],
     "paths": {
+        "/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Logs user into the system",
+                "description": "Used fields are Email and password",
+                "operationId": "App\\Http\\Controllers\\Api\\AuthController::login",
+                "requestBody": {
+                    "description": "User credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "description": "Get a JWT via given credentials.",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": "Get a JWT via given credentials.",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful login",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "access_token": {
+                                            "description": "Get a JWT via given credentials.",
+                                            "type": "string"
+                                        },
+                                        "token_type": {
+                                            "description": "Get a JWT via given credentials.",
+                                            "type": "string"
+                                        },
+                                        "expires_in": {
+                                            "description": "Get a JWT via given credentials.",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid credentials"
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Logs out current logged in user",
+                "description": "",
+                "operationId": "App\\Http\\Controllers\\Api\\AuthController::logout",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/movie": {
             "get": {
                 "tags": [
