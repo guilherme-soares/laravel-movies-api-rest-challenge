@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  *  @OA\Property(property="id", type="integer"),
  *  @OA\Property(property="name", type="string"),
  *  @OA\Property(property="year", type="integer"),
- *  @OA\Property(property="sinopse", type="string"),
+ *  @OA\Property(property="synopsis", type="string"),
  *  @OA\Property(property="duration", type="string"),
  *  @OA\Property(property="directors", type="string"),
  *  @OA\Property(property="writers", type="string"),
@@ -21,6 +22,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Movie extends Model
 {
+    use HasFactory;
+
     /**
      * Model's attributes casts
      *

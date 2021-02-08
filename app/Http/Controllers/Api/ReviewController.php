@@ -96,6 +96,7 @@ class ReviewController extends Controller
      *     summary="Add a new review",
      *     description="",
      *     path="/review",
+     *     security={ {"bearer": {} }},
      *     @OA\RequestBody(
      *          required=true,
      *          description="Review object that needs to be added",
@@ -123,7 +124,7 @@ class ReviewController extends Controller
 
             $review->save();
 
-            return response()->json($review);
+            return response()->json($review, 201);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Please, contact support.'], 500);
         }

@@ -21,7 +21,7 @@
                     "Auth"
                 ],
                 "summary": "Logs user into the system",
-                "description": "Used fields are Email and password",
+                "description": "Used fields are email and password",
                 "operationId": "App\\Http\\Controllers\\Api\\AuthController::login",
                 "requestBody": {
                     "description": "User credentials",
@@ -219,7 +219,12 @@
                     "422": {
                         "description": "Validation errors"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
             }
         },
         "/review/{reviewId}": {
@@ -329,7 +334,7 @@
             "StoreReviewRequest": {
                 "required": [
                     "title",
-                    "description",
+                    "content",
                     "rating",
                     "movie_id"
                 ],
@@ -337,7 +342,7 @@
                     "title": {
                         "type": "string"
                     },
-                    "description": {
+                    "content": {
                         "type": "string"
                     },
                     "rating": {
@@ -386,7 +391,7 @@
                     "year": {
                         "type": "integer"
                     },
-                    "sinopse": {
+                    "synopsis": {
                         "type": "string"
                     },
                     "duration": {
@@ -422,7 +427,7 @@
                     "title": {
                         "type": "string"
                     },
-                    "description": {
+                    "content": {
                         "type": "string"
                     },
                     "rating": {

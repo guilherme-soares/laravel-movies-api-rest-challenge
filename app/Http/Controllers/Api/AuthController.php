@@ -26,7 +26,7 @@ class AuthController extends Controller
      * @OA\Post(
      *     tags={"Auth"},
      *     summary="Logs user into the system",
-     *     description="Used fields are Email and password",
+     *     description="Used fields are email and password",
      *     path="/login",
      *     @OA\RequestBody(
      *          required=true,

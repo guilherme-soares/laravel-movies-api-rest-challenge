@@ -25,7 +25,7 @@ class MovieController extends Controller
      */
     public function index()
     {
-		$movies = Movie::select(['id', 'name', 'sinopse'])->get();
+		$movies = Movie::select(['id', 'name', 'synopsis'])->get();
 
 		return response()->json($movies);
     }

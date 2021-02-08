@@ -17,7 +17,7 @@ class CreateMoviesTable extends Migration
 			$table->id();
 			$table->string("name");
 			$table->year("year");
-			$table->string("sinopse");
+			$table->text("synopsis");
 			$table->string("duration", 5);
 			$table->string("directors");
 			$table->string("writers");

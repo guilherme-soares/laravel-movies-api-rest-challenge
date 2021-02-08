@@ -65,7 +65,7 @@ class UserController extends Controller
 		try {
 			$user->save();
 
-			return response()->json($user);
+			return response()->json($user, 201);
 		} catch (\Exception $e) {
 			return response()->json(['error' => 'Please, contact support.'], 500);
 		}

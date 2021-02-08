@@ -35,7 +35,7 @@ class StoreUserRequest extends FormRequest
         return [
             'name'     => 'required|max:255',
             'email'    => 'required|email|unique:users,email',
-            'password' => 'required',
+            'password' => 'required|between:8,30',
         ];
     }
 
@@ -53,7 +53,7 @@ class StoreUserRequest extends FormRequest
             'email.required' => 'Please, type in the user\'s email.',
             'email.email'    => 'Please, type in a valid email.',
             'email.unique'   => 'This email is already in use.',
-            'password.*'     => 'Please, type in a password.',
+            'password.*'     => 'Please, type in a password (Between 1 and 30 characters).',
         ];
     }
 }

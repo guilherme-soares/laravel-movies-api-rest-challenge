@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  *  @OA\Xml(name="Review"),
  *  @OA\Property(property="id", type="integer"),
  *  @OA\Property(property="title", type="string"),
- *  @OA\Property(property="description", type="string"),
+ *  @OA\Property(property="content", type="string"),
  *  @OA\Property(property="rating", type="number", example="8.5"),
  *  @OA\Property(property="movie_id", type="integer"),
  *  @OA\Property(property="user_id", type="integer")
@@ -17,12 +18,14 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Review extends Model
 {
+    use HasFactory;
+
 	/**
 	 * The Review's attributes that are mass-assignable
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['title', 'description', 'rating', 'movie_id'];
+	protected $fillable = ['title', 'content', 'rating', 'movie_id'];
 
     /**
      * The attributes that should be hidden for arrays
